@@ -1,0 +1,149 @@
+<div class="Edit">
+    <div class="Edit-textos">
+        <div class="titulos">
+            <h2>Procedimentos</h2>
+            <p><b>Edite o formulário</b> para atualizar a tabela de procedimentos</p>
+        </div>
+        <span class="material-symbols-outlined">
+            close
+        </span>
+    </div>
+    <div class="procedimentoForm">
+        <div class="input-MAT">
+            <mat-form-field class="example-full-width">
+                <mat-label>Nome do procedimento</mat-label>
+                <input matInput placeholder="Ex. Check-up" value="" [(ngModel)]="procedimento.nomeProcedimento">
+            </mat-form-field>
+        </div>
+        <div class="input-MAT">
+            <mat-form-field>
+                <mat-label>Escolha uma data</mat-label>
+                <input matInput [matDatepicker]="picker" [(ngModel)]="procedimento.data">
+                <mat-hint>YYYY/MM/DD</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker startView="month" [startAt]="startDate"></mat-datepicker>
+            </mat-form-field>
+        </div>
+        <div class="input-MAT">
+            <mat-form-field>
+                <mat-label>Selecione uma opcão</mat-label>
+                <mat-select [(ngModel)]="procedimento.resultado">
+                  <mat-option value="Aguardando">Aguardando</mat-option>
+                  <mat-option value="Enviado">Enviado</mat-option>
+                  <mat-option value="Cancelado">Cancelado</mat-option>
+                </mat-select>
+              </mat-form-field>
+        </div>
+        <div class="input-MAT">
+            <mat-form-field>
+                <mat-label>Selecione uma opcão</mat-label>
+                <mat-select [(ngModel)]="procedimento.diagnostico">
+                  <mat-option value="Aguardando">Aguardando</mat-option>
+                  <mat-option value="Enviado">Enviado</mat-option>
+                  <mat-option value="Cancelado">Cancelado</mat-option>
+                </mat-select>
+              </mat-form-field>
+        </div>
+    </div>
+
+    <div class="procedimento-data-input">
+        <div class="procedimento-data-select">
+            <h3>Veterinario:</h3>
+            @if(procedimento.veterinario == null){
+
+            }@else{
+            <button class="" (click)="buscarVeterinario()">
+                <p>Trocar tutor</p>
+            </button>
+            }
+        </div>
+        <div class="procedimento-data-view">
+            @if(procedimento.veterinario == null){
+            <button (click)="buscarVeterinario()">
+                <p>Selecionar Veterinario</p>
+            </button>
+            }@else {
+            <div class="patient-data-input">
+                <div class="input-MAT">
+                    <label for="">Nome</label>
+                    <mat-form-field class="example-full-width">
+                        <input matInput placeholder="{{procedimento.veterinario.nome}}" value="">
+                    </mat-form-field>
+                </div>
+                <div class="input-MAT">
+                    <label for="">CRMV</label>
+                    <mat-form-field class="example-full-width">
+                        <input matInput placeholder="{{procedimento.veterinario.crmv}}" value="">
+                    </mat-form-field>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+    <div>
+        <button (click)="save()">
+            <p>Adicionar</p>
+        </button>
+    </div>
+</div>
+
+<!--
+<div class="container">
+    <h3 style="color: #000">PROCEDIMENTO</h3>
+    <p>Edite o formulário para atualizar a tabela de procedimentos</p>
+    <div class="card">
+        <div class="card-body">
+            <div class="holder">
+                Procedimento
+                <input type="text" name="nome" class="form-control" (keyup.enter)="save()"
+                    [(ngModel)]="procedimento.nomeProcedimento" />
+                Data
+                <input type="text" name="nome" class="form-control" (keyup.enter)="save()"
+                    [(ngModel)]="procedimento.data" />
+                Resultado
+                <input type="text" name="nome" class="form-control" (keyup.enter)="save()"
+                    [(ngModel)]="procedimento.resultado" />
+                Diagnostico 
+                <input type="text" name="nome" class="form-control" (keyup.enter)="save()"
+                    [(ngModel)]="procedimento.diagnostico" />
+                <div>
+                    @if(procedimento.veterinario == null){
+                    <button style="background-color: #87B6A7; color: white;" type="button" class="btn btn-rounded" mdbRipple (click)="buscarVeterinario()">
+                        Buscar veterinario</button>
+                    }@else {
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <p class="text-primary alert-primary">Veterinário: {{procedimento.veterinario.nome}}</p>
+                        </div>
+                        <div class="col-lg-4">
+                            <button type="button" class="btn btn-warning btn-rounded" mdbRipple
+                                (click)="buscarVeterinario()">
+                                Trocar Veterinario
+                            </button>
+                        </div>
+                    </div>
+                    }
+                </div>
+                <button type="button" style="background-color: #dfaeb5;" class="btn btn-info btn-rounded" (keyup.enter)="save()" data-mdb-ripple-init
+                    (click)="save()">
+                    Adicionar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+-->
+
+
+
+<ng-template #modalVeterinarios>
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Veterinarios</h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modalRef.close()"></button>
+    </div>
+    <div class="modal-body">
+
+        <app-veterinarioslist [esconderBotoes]="true" (retorno)="retornoVeterinario($event)"></app-veterinarioslist>
+
+    </div>
+</ng-template>

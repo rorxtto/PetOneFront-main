@@ -1,0 +1,35 @@
+/* You can add global styles to this file, and also import other style files */
+@import '@fortawesome/fontawesome-free/css/all.css';
+@import 'mdb-angular-ui-kit/assets/scss/mdb.scss';
+
+.centralizar{
+    text-align: center;
+}
+
+.alinharDireita{
+    text-align: right !important;
+}
+
+.alinhamentoListagem{
+    display: flex;
+    justify-content: space-between;
+}
+
+*{
+    font-family: Inter;
+}
+
+.CustomModal{
+    --mdb-modal-width: 65rem;
+}
+
+.modal-header{
+    display: none;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+.mat-mdc-form-field {
+    width: 100%;
+}
